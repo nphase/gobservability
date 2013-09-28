@@ -34,8 +34,11 @@ func Run(listen_port string, interval time.Duration) {
 		return
 	}
 
-	http.HandleFunc("/", handler)
-	go http.ListenAndServe(listen_port, nil)
+	ServeMux := http.NewServeMux()
+	ServeMux.HandleFunc("/", handler)
+
+	HttpServer := &http.Server{Addr: listen_port, Handler: ServeMux}
+	go HttpServer.ListenAndServe()
 
 	for {
 		memStats := runtime.MemStats{}
