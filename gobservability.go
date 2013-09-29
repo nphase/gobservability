@@ -22,6 +22,10 @@ func (r J) String() (s string) {
 	return
 }
 
+func RegisterChannel(name string, channel interface{}) {
+	fmt.Printf("received")
+}
+
 func Run(listen_port string, interval time.Duration) {
 
 	start_time := time.Now()
